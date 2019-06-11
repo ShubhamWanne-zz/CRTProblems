@@ -1,0 +1,83 @@
+Find the element that appears once in an array where every other element appears twice
+Given an array of integers. All numbers occur twice except one number which occurs once. Find the number in O(n) time & constant extra space.
+
+Example :
+
+Input:  ar[] = {7, 3, 5, 4, 5, 3, 4}
+Output: 7
+
+
+Solution 1: Using XOR
+
+class MaxSum 
+{ 
+    // Return the maximum Sum of difference 
+    // between consecutive elements. 
+    static int findSingle(int ar[], int ar_size) 
+    { 
+        // Do XOR of all elements and return 
+        int res = ar[0]; 
+        for (int i = 1; i < ar_size; i++) 
+            res = res ^ ar[i]; 
+      
+        return res; 
+    } 
+  
+    // Driver code 
+    public static void main (String[] args) 
+    { 
+        int ar[] = {2, 3, 5, 4, 5, 3, 4}; 
+        int n = ar.length; 
+        System.out.println("Element occurring once is " + 
+                            findSingle(ar, n) + " "); 
+    } 
+} 
+
+
+Solution 2: 
+This is not an efficient approach but just another way to get the desired results.
+If we add each number once and multiply the sum by 2, we will get twice sum of each element of the array.
+Then we will subtract the sum of the whole array from the twice_sum and get the required number (which appears once in the array).
+
+Array [] : [a, a, b, b, c, c, d]
+Mathematical Equation = 2*(a+b+c+d) – (a + a + b + b + c + c + d)
+
+
+// Java program to find  
+// element that appears once 
+import java.io.*; 
+import java.util.*; 
+  
+class MaxSum  
+{ 
+  
+    // function which find number 
+    static int singleNumber(int[] nums, int n) 
+    { 
+        HashMap<Integer, Integer> m = new HashMap<>(); 
+        long sum1 = 0, sum2 = 0; 
+        for (int i = 0; i < n; i++) 
+        { 
+            if (!m.containsKey(nums[i])) 
+            { 
+                sum1 += nums[i]; 
+                m.put(nums[i], 1); 
+            } 
+            sum2 += nums[i]; 
+        } 
+  
+        // applying the formula. 
+        return (int)(2 * (sum1) - sum2);  
+    } 
+  
+    // Driver code 
+    public static void main(String args[]) 
+    { 
+        int[] a = {2, 3, 5, 4, 5, 3, 4}; 
+        int n = 7; 
+        System.out.println(singleNumber(a,n)); 
+  
+        int[] b = {15, 18, 16, 18, 16, 15, 89}; 
+        System.out.println(singleNumber(b,n)); 
+    } 
+}  
