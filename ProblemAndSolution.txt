@@ -1,0 +1,57 @@
+Book Meeting Rooms
+
+Given a 2D array, each value in the array contains array of start and end time.
+Calculate the numbers of meeting room required.
+
+{
+	{1,2},
+	{3,15},
+	{5,8},
+	{15,23},
+	{16,44},
+	{24,48},
+	{44,60},
+	{5,51}
+}
+
+Number of meeting rooms required is 3.
+
+
+Solution:
+
+public class Client {
+	public static void main(String... args) {
+		
+		int[][] arr = {{1,2},{3,15},{5,8},{15,23},{16,44},{24,48},{44,60},{5,51}};
+		
+		Map<Integer, Integer> map = new HashMap<>();
+		
+		Arrays.sort(arr, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				return Integer.compare(o1[0], o2[0]);
+			}
+		});
+				
+		boolean flag=false;
+		int roomnumber=0;
+		for(int i=0;i<arr.length;i++) {
+			if(i==0) {
+				map.put(++roomnumber, arr[i][1]);
+				continue;
+			}
+			for(Map.Entry<Integer, Integer> e : map.entrySet()) {
+				if(e.getValue() <= arr[i][0]) {
+					map.put(e.getKey(), arr[i][1]);
+					flag=true;
+					break;
+				}
+			}
+			if(!flag) {
+				map.put(++roomnumber, arr[i][1]);
+			}
+			flag=false;
+		}
+		System.out.println(map.size());
+	}
+}	
