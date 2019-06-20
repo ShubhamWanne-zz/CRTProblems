@@ -1,0 +1,74 @@
+Find the Missing Number
+You are given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in the list. One of the integers is missing in the list. Write an efficient code to find the missing integer.
+
+Example :
+Input: arr[] = {1, 2, 4,, 6, 3, 7, 8}
+Output: 5
+Input: arr[] = {1, 2, 3, 5}
+Output: 4
+
+
+#include <iostream>
+using namespace std;
+
+int missingNumber(int arr[], int n){
+    int total = (n+1) * (n + 2)/2;
+    for (int i = 0; i < n; i++)
+    {
+        total -= arr[i]; 
+    }
+    return total;    
+}
+int main() {
+    int arr[] = { 1, 2, 4, 5, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << missingNumber(arr, n);
+	return 0;
+}
+===========================================================================================================================================
+Write a program to reverse an array !
+Examples :
+
+Input  : arr[] = {1, 2, 3}
+Output : arr[] = {3, 2, 1}
+
+Input :  arr[] = {4, 5, 1, 2}
+Output : arr[] = {2, 1, 5, 4}
+
+
+void rvereseArray(int arr[], int start, int end) 
+{ 
+    while (start < end) 
+    { 
+        int temp = arr[start];  
+        arr[start] = arr[end]; 
+        arr[end] = temp; 
+        start++; 
+        end--; 
+    }  
+}
+===========================================================================================================================================
+Segregate 0s and 1s in an array
+You are given an array of 0s and 1s in random order. Segregate 0s on left side and 1s on right side of the array. Traverse array only once.
+Input array   =  [0, 1, 0, 1, 0, 0, 1, 1, 1, 0] 
+Output array =  [0, 0, 0, 0, 0, 1, 1, 1, 1, 1] 
+
+
+void segregate0and1(int arr[], int n) 
+{ 
+    int count = 0; // Counts the no of zeros in arr 
+  
+    for (int i = 0; i < n; i++) { 
+        if (arr[i] == 0) 
+            count++; 
+    } 
+  
+    // Loop fills the arr with 0 until count 
+    for (int i = 0; i < count; i++) 
+        arr[i] = 0; 
+  
+    // Loop fills remaining arr space with 1 
+    for (int i = count; i < n; i++) 
+        arr[i] = 1; 
+} 
+
